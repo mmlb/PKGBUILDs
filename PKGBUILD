@@ -47,3 +47,5 @@ package() {
   cp -a argparse bottle python-frozendict jedi requests requests-futures waitress \
     "$pkgdir/usr/share/vim/vimfiles/third_party/"
 }
+
+# vim:set ts=2 sw=2 et:
