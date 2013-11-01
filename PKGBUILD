@@ -30,6 +30,19 @@ source=('git+https://github.com/Valloric/YouCompleteMe.git'
 sha1sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
 install=install
 
+prepare() {
+  cd "$srcdir/YouCompleteMe"
+  for s in ${source[@]:1}
+  do
+    repo=${s##*/}
+    repo=${repo/.git}
+    echo "s=$s, repo=$repo"
+    sed -i -e "/${repo}$/ s|https://github.com/.*|$srcdir/$repo|" .gitmodules
+    sed -i -e "/${repo}.git$/ s|https://github.com/.*|$srcdir/$repo|" .gitmodules
+  done
+  git submodule update --init
+}
+
 build() {
   cd "YouCompleteMe/cpp"
   cmake -G "Unix Makefiles" -DUSE_SYSTEM_LIBCLANG=ON
