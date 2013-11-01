@@ -56,10 +56,6 @@ package() {
   cd "$srcdir/YouCompleteMe"
   cp -a autoload doc plugin python third_party "$pkgdir/usr/share/vim/vimfiles"
   ln -sf /usr/lib/llvm/libclang.so "$pkgdir/usr/share/vim/vimfiles/python/"
-
-  cd "$srcdir"
-  cp -a argparse bottle python-frozendict jedi requests requests-futures waitress \
-    "$pkgdir/usr/share/vim/vimfiles/third_party/"
 }
 
 # vim:set ts=2 sw=2 et:
