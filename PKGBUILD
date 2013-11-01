@@ -18,14 +18,14 @@ depends=('gvim' 'clang' 'python2')
 makedepends=('git' 'cmake')
 provides=('vim-youcompleteme')
 conflicts=('vim-youcompleteme')
-source=('git+git://github.com/Valloric/YouCompleteMe.git'
-        'git+git://github.com/bewest/argparse.git'
-        'git+git://github.com/defnull/bottle.git'
-        'git+git://github.com/slezica/python-frozendict.git'
-        'git+git://github.com/davidhalter/jedi.git'
-        'git+git://github.com/kennethreitz/requests.git'
-        'git+git://github.com/ross/requests-futures.git'
-        'git+git://github.com/Pylons/waitress.git')
+source=('git+https://github.com/Valloric/YouCompleteMe.git'
+        'git+https://github.com/bewest/argparse.git'
+        'git+https://github.com/defnull/bottle.git'
+        'git+https://github.com/slezica/python-frozendict.git'
+        'git+https://github.com/davidhalter/jedi.git'
+        'git+https://github.com/kennethreitz/requests.git'
+        'git+https://github.com/ross/requests-futures.git'
+        'git+https://github.com/Pylons/waitress.git'
 sha1sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
 install=install
 
