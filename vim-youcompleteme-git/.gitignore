@@ -1,15 +1,10 @@
-.*
-!.gitignore
-*.pkg.tar.xz
 OmniSharpServer/
 YouCompleteMe/
 argparse/
 bottle/
 jedi/
-pkg/
 python-frozendict/
 requests-futures/
 requests/
-src/
 vimdoc.install
 waitress/
