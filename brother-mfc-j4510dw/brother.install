@@ -1,0 +1,13 @@
+post_install() {
+	opt/brother/Printers/mfcj4510dw/inf/setupPrintcapij mfcj4510dw -i  
+	opt/brother/Printers/mfcj4510dw/cupswrapper/cupswrappermfcj4510dw -i
+}
+
+pre_remove() {
+	opt/brother/Printers/mfcj4510dw/cupswrapper/cupswrappermfcj4510dw -e
+	opt/brother/Printers/mfcj4510dw/inf/setupPrintcapij mfcj4510dw -e
+}
+
+post_remove() {
+	rm -f /tmp/mfcj4510dw_latest_print_info
+}

@@ -1,0 +1,47 @@
+# Maintainer: Manuel Mendez <mmendez534@gmail.com>
+pkgname=brother-mfc-j4510dw
+pkgver=3.0.0
+pkgrel=1
+pkgdesc="LPR and CUPS driver for the Brother MFC-J4510DW"
+arch=('i686' 'x86_64')
+url="http://welcome.solutions.brother.com/bsc/public_s/id/linux/en/index.html"
+license=('custom' 'GPL2')
+depends=('cups')
+makedepends=('deb2targz')
+install=brother.install
+source=(http://www.brother.com/pub/bsc/linux/dlf/mfcj4510dwlpr-3.0.0-1.i386.deb
+        http://www.brother.com/pub/bsc/linux/dlf/mfcj4510dwcupswrapper-3.0.0-1.i386.deb
+        cupswrappermfcj4510dw.patch
+        brother.install
+        brother-license-agreement.txt)
+sha256sums=('7d94372aef8027c3d7dfe50d7d1b0125035b7884ccb5ced6c8fb4c0310c937ee'
+            'dacf5f655d03d28d59bb24e4d8bbc00da2828101c0b74f0db49f99d108322aef'
+            '6897c3b6db01df3eb5720cc6c9d5cc8f88f50f0381ef3cb36c2f123dfff49bf2'
+            'cb2b468a39dfbed09bad5dd56ed8e58ce277cacef830c094ef56f5de614f9408'
+            '92887e9d3e401b2edf116e5a6910885631172fabb240144a9022b457d1d99256')
+
+build() {
+  cd "$srcdir"
+  for d in *.deb
+  do
+    deb2targz $d
+  done
+  for p in *.tar.gz
+  do
+    bsdtar -xf $p
+  done
+
+  _mfcdir=opt/brother/Printers/mfcj4510dw
+  if ! grep -q systemd $_mfcdir/cupswrapper/cupswrappermfcj4510dw
+  then
+    patch $_mfcdir/cupswrapper/cupswrappermfcj4510dw < ${source[2]}
+  fi
+  sed -i $_mfcdir/inf/setupPrintcapij -e 's|printcap\.local|printcap|'
+}
+
+package() {
+  cp -a $srcdir/{opt,usr} $pkgdir
+  install -Dm444 $srcdir/brother-license-agreement.txt $pkgdir/usr/share/licenses/$pkgname/LICENSE
+}
+
+# vim:set ts=2 sw=2 et:

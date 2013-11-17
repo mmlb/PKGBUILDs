@@ -1,0 +1,15 @@
+--- opt/brother/Printers/mfcj4510dw/cupswrapper/cupswrappermfcj4510dw	2013-11-16 23:52:38.345497879 -0500
++++ opt/brother/Printers/mfcj4510dw/cupswrapper/cupswrappermfcj4510dw	2013-11-16 23:58:56.551547385 -0500
+@@ -47,7 +47,11 @@
+   rm -f /usr/lib64/cups/filter/brother_lpdwrapper_${printer_model}
+   rm -f /opt/brother/${device_model}/${printer_model}/cupswrapper/brcupsconfpt1
+ #  rm -f /usr/local/Brother/${device_model}/${printer_model}/cupswrapper/brcupsconfpt1
+-if [  -e /etc/init.d/cups ]; then
++if [  -e /usr/bin/systemctl ]; then
++  if /usr/bin/systemctl -q is-active cupsd; then
++     /usr/bin/systemctl restart cupsd.service
++  fi
++elif [  -e /etc/init.d/cups ]; then
+    /etc/init.d/cups restart
+ elif [  -e /etc/init.d/cupsys ]; then
+    /etc/init.d/cupsys restart
